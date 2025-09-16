@@ -1,0 +1,57 @@
+logar no dock hub
+se der erro "error response from daemon head unauthorized"
+docker login
+
+# listar imagens
+docker images
+
+# baixar imagem do mysql
+docker pull mysql
+docker pull mysql:5.7.39
+
+# criar container do mysql
+docker run --name cd-mysql-latest -e MYSQL_ROOT_PASSWORD=root -d -p 3306:3306 mysql
+docker run --name cd-mysql-5 -e MYSQL_ROOT_PASSWORD=root -d -p 3307:3306 mysql:5.7.39
+
+# listar containers
+docker ps
+docker ps -a
+
+# iniciar container 
+docker start container_id
+docker start container_name
+
+# parar container 
+docker stop container_id
+docker stop container_name
+
+# deletar container 
+docker container rm container_name
+
+# criar imagem a partir de arquivo Dockerfile (rodar comando na pasta com Dockerfile)
+docker build --tag nomeimagem .
+
+# criar imagem da aplicação
+docker build --tag cursodocker/springapp .
+docker build -t gpm777/cursodocker-springapp . 
+
+# criar container da aplicação
+docker run --name springapp1 -p 8080:8080 cursodocker/springapp
+docker run --name springapp -p 8081:8080 gpm777/cursodocker-springapp
+
+# executar container em modo background (com o parâmetro d)
+docker run --name springapp1 -p 8080:8080 -d cursodocker/springapp
+
+# enviar imagem da aplicação para dockerhub 
+docker login
+docker push gpm777/cursodocker-springapp
+
+# dockerfile sem multi-stage build
+
+FROM openjdk:21
+
+WORKDIR /app
+
+COPY ./target/convidados-0.0.1-SNAPSHOT.jar .
+
+ENTRYPOINT java -jar convidados-0.0.1-SNAPSHOT.jar

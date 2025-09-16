@@ -1,0 +1,5 @@
+# gerar jar 
+./mvnw clean package -DskiptTests
+
+# rodar jar
+java -jar .\target\convidados-0.0.1-SNAPSHOT.jar

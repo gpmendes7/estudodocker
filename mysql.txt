@@ -1,0 +1,10 @@
+create database empresa;
+
+create table pessoa (
+  id integer not null primary key,
+  nome varchar(100) not null
+);
+
+select * from pessoa;
+
+insert into pessoa values (1, 'Fulano');
