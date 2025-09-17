@@ -8,3 +8,20 @@ create table pessoa (
 select * from pessoa;
 
 insert into pessoa values (1, 'Fulano');
+
+create database festa;
+
+create table convidado (
+  cpf char(11) not null primary key,
+  nome varchar(100) not null
+);
+
+insert into convidado (cpf, nome)
+values 
+('01234567890', 'fulano de tal');
+
+insert into convidado (cpf, nome)
+values 
+('09876543210', 'cicrano');
+
+select * from convidado;

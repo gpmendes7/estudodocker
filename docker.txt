@@ -34,10 +34,25 @@ docker build --tag nomeimagem .
 # criar imagem da aplicação
 docker build --tag cursodocker/springapp .
 docker build -t gpm777/cursodocker-springapp . 
+docker build -t gpm777/cursodocker-springapp:1.0 . 
+docker build -t gpm777/cursodocker-convidadosapi .
+
+# deletar imagem da aplicação
+docker image rm gpm777/cursodocker-springapp
+
+# baixar imagem da aplicação
+docker pull gpm777/cursodocker-springapp
 
 # criar container da aplicação
 docker run --name springapp1 -p 8080:8080 cursodocker/springapp
 docker run --name springapp -p 8081:8080 gpm777/cursodocker-springapp
+docker run --name convidadosapi -p 8081:8080 gpm777/cursodocker-convidadosapi
+
+# criar container da aplicação com network
+docker network create festanetwork
+docker network ls
+docker run --name cd-mysql-5 -e MYSQL_ROOT_PASSWORD=root -d -p 3307:3306 --network festanetwork mysql:5.7.39
+docker run --name convidadosapi -p 8081:8080 --network festanetwork gpm777/cursodocker-convidadosapi
 
 # executar container em modo background (com o parâmetro d)
 docker run --name springapp1 -p 8080:8080 -d cursodocker/springapp
